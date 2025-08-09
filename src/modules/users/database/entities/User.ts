@@ -7,17 +7,20 @@ import {
 } from "typeorm";
 
 @Entity('users')
-export class User{
+export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name:string;
+  name: string;
 
   @Column()
   email: string;
 
   @Column()
+  password: string;   // <-- adiciona esta coluna
+
+  @Column({ nullable: true })
   avatar: string;
 
   @CreateDateColumn()
