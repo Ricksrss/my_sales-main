@@ -1,5 +1,5 @@
 import { compare } from "bcrypt";  // para comparar senha hash
-import { sign } from "jsonwebtoken";
+import { Secret, sign } from "jsonwebtoken";
 import AppError from '../../../shared/errors/AppError.ts';
 import { usersRepositories } from "../database/repositories/UserRepositories";
 import { User } from "../database/entities/User";
@@ -28,7 +28,7 @@ export default class SessionUserService {
       throw new AppError("Incorrect email/password combination", 401);
     }
 
-    const token = sign ({}, process.env.APP_SECRET as string, {
+    const token = sign ({}, process.env.APP_SECRET as Secret, {
       subject: String(user.id),
       expiresIn: '1d'
     });
