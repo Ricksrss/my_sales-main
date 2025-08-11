@@ -47,3 +47,4 @@ export default class CustomersController {
     await deleteCustomer.execute({ id });
     return response.status(204).json([]);
   }
+}
