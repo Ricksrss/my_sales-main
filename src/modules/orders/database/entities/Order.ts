@@ -1,20 +1,17 @@
-import { Customer } from "@modules/customers/database/entities/Customer";
-import { CreateDateColumn, Entity, JoinColumn, ManyToOne, UpdateDateColumn } from "typeorm";
-import { PrimaryGeneratedColumn } from "typeorm/browser";
-
+import { Entity, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { OrderProducts } from './OrderProducts.js';
 
 @Entity('orders')
-export class Order{
-  @PrimaryGeneratedColumn()
-  id: number
+export class Order {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @ManyToOne(() => Customer)
-    @JoinColumn({name: 'customer_id'})
-  customer: Customer
+  @OneToMany(() => OrderProducts, (op) => op.order, { cascade: true })
+  order_products: OrderProducts[];
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   created_at: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updated_at: Date;
 }

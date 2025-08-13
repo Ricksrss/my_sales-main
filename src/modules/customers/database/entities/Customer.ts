@@ -1,19 +1,22 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity('customers')
-export class Customer{
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Customer {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 150 })
   name: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 180, unique: true })
   email: string;
 
-  @CreateDateColumn()
-  createdAt: Date;
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  phone?: string | null;
 
-  @UpdateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
+  created_at: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
   updated_at: Date;
 }

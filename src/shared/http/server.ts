@@ -3,10 +3,13 @@ import 'express-async-errors';
 import express from 'express';
 import cors from 'cors';
 import { errors } from 'celebrate';
+import 'reflect-metadata';
+
 
 import routes from './routes/index.js';
 import ErrorHandleMiddleware from '../middlewares/ErrorHandleMiddleware.js';
 import { AppDataSource } from '../typeorm/data.source.js';
+import 'reflect-metadata';
 
 AppDataSource.initialize().then(async () => {
   const app = express();

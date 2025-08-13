@@ -4,11 +4,12 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch src --exec node --loader ts-node/esm -r tsconfig-paths/register src/shared/http/server.ts",
+    "dev": "tsx watch src/shared/http/server.ts",
     "lint": "eslint --ext .ts .",
     "lint-fix": "eslint --ext .ts . --fix",
-    "migration:create": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create",
-    "migration:run": "node --loader ts-node/esm -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d src/shared/typeorm/data.source.ts"
+    "migration:create": "tsx ./node_modules/typeorm/cli.js migration:create",
+    "migration:run": "tsx ./node_modules/typeorm/cli.js migration:run -d src/shared/typeorm/data.source.ts",
+    "build": "tsc -p tsconfig.build.json"
   },
   "keywords": [],
   "author": "",
@@ -45,6 +46,7 @@
     "nodemon": "^3.1.0",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.20.4",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.39.0"
   }
