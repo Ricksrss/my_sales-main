@@ -1,6 +1,7 @@
-import AppError from '../../../shared/errors/AppError.ts';
-import { Product } from "../database/entities/Products";
-import { productRepositories } from '../database/repositories/ProductsRepositories.ts';
+import RedisCache from '@modules/shared/cache/RedisCache.js';
+import AppError from '../../../shared/errors/AppError.js';
+import { Product } from "../database/entities/Products.js";
+import { productRepositories } from '../database/repositories/ProductsRepositories.js';
 
 interface ICreateProduct{
   name: string;
@@ -22,6 +23,9 @@ export default class CreateProductService{
       quantity,
     });
     await  productRepositories.save(product);
+
+    const redisCache = new RedisCache();
+    await redisCache.invalidate('api-mysales:PRODUCT_LIST');
 
     return product
 
