@@ -1,14 +1,16 @@
-import ListCustomerService from "../services/ListCustomersService";
+import ListCustomerService from "../services/ListCustomersService.js";
 import { Request, Response } from "express";
-import ShowCustomerService from "../services/ShowCustomerService";
-import CreateCustomerService from "../services/CreateCustomerService";
-import UpdateCustomerService from "../services/UpdateCustomerService";
-import DeleterCustomerService from "../services/DeleteCustomerService";
+import ShowCustomerService from "../services/ShowCustomerService.js";
+import CreateCustomerService from "../services/CreateCustomerService.js";
+import UpdateCustomerService from "../services/UpdateCustomerService.js";
+import DeleterCustomerService from "../services/DeleteCustomerService.js";
 
 export default class CustomersController {
   async index(request: Request, response: Response): Promise<Response> {
+    const page = parseInt(request.query.page as stirng) || 1;
+    const limit = parseInt(request.query.limit as string) || 10;
     const listCustomers = new ListCustomerService();
-    const customers = await listCustomers.execute();
+    const customers = await listCustomers.execute(page, limit);
     return response.json(customers);
   }
 

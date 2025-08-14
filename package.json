@@ -21,6 +21,7 @@
     "@types/nodemailer": "^6.4.17",
     "bcrypt": "^6.0.0",
     "celebrate": "^15.0.3",
+    "class-transformer": "^0.5.1",
     "cors": "^2.8.5",
     "cross-env": "^10.0.0",
     "date-fns": "^4.1.0",

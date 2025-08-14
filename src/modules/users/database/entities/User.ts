@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-
+import { Expose, Exclude } from 'class-transformer';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -12,6 +12,7 @@ export class User {
   email: string;
 
   @Column({ type: 'varchar', length: 255 })
+  @Exclude()
   password: string;
 
   @CreateDateColumn({ name: 'created_at' })
@@ -19,4 +20,10 @@ export class User {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updated_at: Date;
+
+  @Expose({ name: 'avatar_url'})
+  getAvatarUrl(): string | null {
+    if(!this.avatar) return null
+    return `${process.env.APP_API_URL}/files/${this.avatar}`;
+  }
 }
